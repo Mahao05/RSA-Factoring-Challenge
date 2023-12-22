@@ -1,0 +1,28 @@
+import math
+
+def is_prime(n):
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    for i in range(5, int(math.sqrt(n)) + 1, 6):
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+    return True
+
+def find_primes(n):
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0 and is_prime(i) and is_prime(n // i):
+            return i, n // i
+    return None
+
+n = int(input("Enter the RSA number: "))
+primes = find_primes(n)
+if primes:
+    p, q = primes
+    print("p =", p)
+    print("q =", q)
+else:
+    print("No prime factors found for the given RSA number."
